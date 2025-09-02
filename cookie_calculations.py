@@ -17,6 +17,10 @@ def bakeCookies(cookies):
 	for ingredient, amount in fourtyEightCookies.items():
 		adjustedRecipe[ingredient] = round(amount * scaleFactor, 2)
 
-	return adjustedRecipe
+	return (
+		f"{list(adjustedRecipe.keys())[0]}: {list(adjustedRecipe.values())[0]}\n"
+		f"{list(adjustedRecipe.keys())[1]}: {list(adjustedRecipe.values())[1]}\n"
+		f"{list(adjustedRecipe.keys())[2]}: {list(adjustedRecipe.values())[2]}\n"
+	)
 
 print(bakeCookies(730))
