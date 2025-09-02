@@ -8,16 +8,13 @@
 # It then estimates the daily rain required during the 9-month rainy season, 
 # and converts this to millimeters of rainfall per day.
 
-waterVolume = 0
 millimetersOfRainFactor = 600000 # Number representing cubic meters of water in lake = 1 millimeter of rain fall
 
 def volume_solid(width, length, depth): # Find the volume of water needed to fill a single container/lock of given dimensions
-	global waterVolume
 	filledLockWaterVolume = width * length * depth
-	waterVolume = filledLockWaterVolume
 	return filledLockWaterVolume
 
-volume_solid(32, 320, 10) # Pass in dimensions of the lock
+waterVolume = volume_solid(32, 320, 10) # Pass in dimensions of the lock
 
 # Find the volume of water needed to fill a container/lock for a full year,
 # how much rain must fall during the 9 month rainy season,
