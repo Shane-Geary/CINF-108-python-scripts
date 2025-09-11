@@ -23,4 +23,4 @@ def bakeCookies(cookies):
 		f"{list(adjustedRecipe.keys())[2]}: {list(adjustedRecipe.values())[2]}\n"
 	)
 
-print(bakeCookies(730))
+print(bakeCookies(104))
