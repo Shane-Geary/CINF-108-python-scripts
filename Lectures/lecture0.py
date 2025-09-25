@@ -13,7 +13,7 @@
 # 	fah = degrees * (9.0 / 5.0) + 32
 # 	print(f"{degrees}\t{fah}")
 
-# Banck account deposit
+# Bank account deposit
 
 balance = 0.0
 
