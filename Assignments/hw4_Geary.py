@@ -16,7 +16,6 @@ aliceIWString = aliceInWonderland.read()
 aliceIWList = aliceIWString.lower().split()
 
 # Create a dictionary variable -- note your dictionary will have 'words' as    #  keys and an integer as a value (which will be the number of words seen in #  the file)
-
 aliceIWWordCount = {}
 
 # loop through each word in your list and
@@ -29,7 +28,6 @@ for word in aliceIWList:
 	else:
 		aliceIWWordCount[word] += 1
 		
-print(aliceIWWordCount['about'])
 
 # Now, Loop through each word and write it to your output file in the format #  specified Note that your dictionary contains some non alphabetic 'words
 #  before writing to the file, check first if it is a legitimate word.  
