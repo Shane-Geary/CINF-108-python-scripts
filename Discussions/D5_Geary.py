@@ -1,25 +1,37 @@
 # Python script to read from a CSV file with data on top Twitch channels and find specified information
 import csv
 
-def findTwitchChannelData():
-	with open('twitchdata.csv', newline="") as file:
+def findTwitchChannelData(firstLevelAttribute, secondLevelAttribute, sortBy=None, filename='twitchdata.csv'):
+	specifiedChannels = []
+	sortedChannels = []
+
+	with open(filename, newline="") as file:
 		reader = csv.DictReader(file)
 
-		japanChannels = []
 		for row in reader:
-			if(row["Language"] == 'Japanese'):
-				# print(row)
-				japanChannels.append(row)
+			if(row[firstLevelAttribute] == secondLevelAttribute):
+				specifiedChannels.append(row)
 
-		# for channel in japanChannels:
-		# 	print(channel['Followers'])
-			# followers.append(channel['Followers'])
+	if not specifiedChannels:
+		print('No matching channels: check attribute parameters.')
 
-		mostFollowedJapanChannel = max(
-			japanChannels,
-			key=lambda row: int(row['Followers'])
-		)
-		
-		print(mostFollowedJapanChannel['Average viewers'])
+	if sortBy:
+		if(specifiedChannels[0][sortBy].isdigit()):
+			largestValueFromChannels = max(
+				specifiedChannels,
+				key=lambda row: int(row[sortBy])
+			)
+			print(largestValueFromChannels)
+		else:
+			print('Sort attribute is not an integer value')
+			sortedChannels = sorted(specifiedChannels, key=lambda row: row[sortBy])
+			print(f'Twitch channels sorted by {sortBy}: ')
+			for channels in sortedChannels:
+				print(channels)
 
-findTwitchChannelData()
+	else:
+		print('Channels matching search criteria: ')
+		for channels in specifiedChannels:
+			print(channels)
+
+findTwitchChannelData('Language', 'Japanese', sortBy='Partnered')
