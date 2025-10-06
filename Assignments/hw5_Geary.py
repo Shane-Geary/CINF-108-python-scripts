@@ -81,16 +81,14 @@ print('\n')
 The rest of the program you will write goes here
 '''
 
-gameEnd = False
-nextRound = True
+gameEnd = False # Flag to begin and end game loop
+nextRound = True # Flag to begin and end round instance
 
 while not gameEnd: # Begin game loop
     if nextRound: # Begin game round instance
-        drawPlayerCard = deck[user_hand[0]] # Find first card in user's deck
-        # playerCard = drawPlayerCard[0] + drawPlayerCard[1]
+        drawPlayerCard = deck[user_hand[0]] # Find first card in user's hand
         
-        drawComputerCard = deck[computer_hand[0]]
-        # computerCard = drawComputerCard[0] + drawComputerCard[1]
+        drawComputerCard = deck[computer_hand[0]] # Find first card in computer's hand
         print(f'Your card: {drawPlayerCard[0] + drawPlayerCard[1]}')
         print(f'Computer player card: {drawComputerCard[0] + drawComputerCard[1]}')
         
