@@ -96,14 +96,22 @@ while not roundEnd:
         print(f'Your card: {playerCard}\nComputer player card: {computerCard}')
         
         if playerCardValue > computerCardValue:
-            # user_hand.remove(drawPlayerCard)
+            user_hand.append(user_hand.pop(0))
+            user_hand.append(computer_hand.pop(0))
             print('You won this round - cards added to the end of your pile')
+            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
         elif computerCardValue > playerCardValue:
+            computer_hand.append(computer_hand.pop(0))
+            computer_hand.append(user_hand.pop(0))
             print('Computer has won this round - cards added to the end of its pile')
+            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
         elif playerCardValue == computerCardValue:
+            user_hand.pop(0)
+            computer_hand.pop(0)
             print('Draw! Both cards discarded')
+            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
             
     else:
