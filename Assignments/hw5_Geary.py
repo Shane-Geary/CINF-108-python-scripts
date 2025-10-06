@@ -15,16 +15,19 @@ import random
 #   H = Hearts
 #   S = Spades
 #   D = Diamonds
-#  The second item is the face value of the card:  (2 - 10, J, Q, K, A for Jack, Queen, King, Ace, respectively.)
+#  The second item is the face value of the card:  (2 - 10, J = Jack, Q = Queen, K = King, A = Ace)
 #  The third item is the actual value of the card (J = 11, Q = 12, K = 13, and A = 14 for the purpose of the game).  
 
-deck = {1:['C','A',14], 2:['C','2',2], 3:['C','3',3], 4:['C','4',4], 5:['C','5',5], 6:['C','6',6], 7:['C','7',7], 8:['C','8',8], 9:['C','9',9],
-        10:['C','10',10], 11:['C','J',11], 12:['C','Q',12], 13:['C','K',13], 14:['H','A',14], 15:['H','2',2], 16:['H','3',3], 17:['H','4',4],
-        18:['H','5',5], 19:['H','6',6], 20:['H','7',7], 21:['H','8',8], 22:['H','9',9], 23:['H','10',10], 24:['H','J',11], 25:['H','Q',12],
-        26:['H','K',13], 27:['S','A',14], 28:['S','2',2], 29:['S','3',3], 30:['S','4',4], 31:['S','5',5], 32:['S','6',6], 33:['S','7',7],
-        34:['S','8',8], 35:['S','9',9], 36:['S','10',10], 37:['S','J',11], 38:['S','Q',12], 39:['S','K',13], 40:['D','A',14], 41:['D','2',2],
-        42:['D','3',3], 43:['D','4',4], 44:['D','5',5], 45:['D','6',6], 46:['D','7',7], 47:['D','8',8], 48:['D','9',9], 49:['D','10',10],
-        50:['D','J',11], 51:['D','Q',12], 52:['D','K',13]}
+deck = {
+    	1:['C','A',14], 2:['C','2',2], 3:['C','3',3], 4:['C','4',4], 5:['C','5',5], 6:['C','6',6], 7:['C','7',7], 8:['C','8',8], 
+    	9:['C','9',9], 10:['C','10',10], 11:['C','J',11], 12:['C','Q',12], 13:['C','K',13], 14:['H','A',14], 15:['H','2',2],
+        16:['H','3',3], 17:['H','4',4], 18:['H','5',5], 19:['H','6',6], 20:['H','7',7], 21:['H','8',8], 22:['H','9',9],
+        23:['H','10',10], 24:['H','J',11], 25:['H','Q',12], 26:['H','K',13], 27:['S','A',14], 28:['S','2',2], 29:['S','3',3],
+        30:['S','4',4], 31:['S','5',5], 32:['S','6',6], 33:['S','7',7], 34:['S','8',8], 35:['S','9',9], 36:['S','10',10],
+        37:['S','J',11], 38:['S','Q',12], 39:['S','K',13], 40:['D','A',14], 41:['D','2',2], 42:['D','3',3], 43:['D','4',4],
+        44:['D','5',5], 45:['D','6',6], 46:['D','7',7], 47:['D','8',8], 48:['D','9',9], 49:['D','10',10], 
+        50:['D','J',11], 51:['D','Q',12], 52:['D','K',13]
+    }
 
 # Create a list containing the keys for the 52 cards
 unshuffled = list(deck.keys())
@@ -36,6 +39,7 @@ shuffled = random.sample(unshuffled, len(unshuffled))
 '''
 print("Here's the shuffled deck keys:\n", shuffled, '\n')
 '''
+
 # Number of cards in each hand (for War, each player gets 1/2 of the deck)
 num_cards = int(len(shuffled)/2)
 
@@ -47,7 +51,7 @@ for draw in range(num_cards):
     computer_hand.append(shuffled.pop(0))
 
 # For testing only -- please remove comments / add back in for you verify understanding
-"""
+# """
 print("Player's hand:")
 for card in user_hand:
     print(deck[card], end=' ')
@@ -57,7 +61,8 @@ print("Computer's hand:")
 for card in computer_hand:
     print(deck[card], end=' ')
 print('\n')
-"""
+# """
+
 # ----- STOP commenting out ---------
 
 # Begin program -- The Card Game of War
@@ -76,4 +81,36 @@ print('\n')
 The rest of the program you will write goes here
 '''
 
+roundEnd = False
+nextRound = True
 
+while not roundEnd:
+    if nextRound:
+        drawPlayerCard = deck[user_hand[0]]
+        playerCard = drawPlayerCard[0] + drawPlayerCard[1]
+        playerCardValue = drawPlayerCard[2]
+        
+        drawComputerCard = deck[computer_hand[0]]
+        computerCard = drawComputerCard[0] + drawComputerCard[1]
+        computerCardValue = drawComputerCard[2]
+        print(f'Your card: {playerCard}\nComputer player card: {computerCard}')
+        
+        if playerCardValue > computerCardValue:
+            # user_hand.remove(drawPlayerCard)
+            print('You won this round - cards added to the end of your pile')
+            nextRound = False
+        elif computerCardValue > playerCardValue:
+            print('Computer has won this round - cards added to the end of its pile')
+            nextRound = False
+        elif playerCardValue == computerCardValue:
+            print('Draw! Both cards discarded')
+            nextRound = False
+            
+    else:
+        playerInput = input('Hit P to play next round or Q to QUIT: ')
+        if playerInput == 'p':
+            print('Next round')
+            nextRound = True
+        elif playerInput == 'q':
+            print('Game end \n')
+            break
