@@ -51,7 +51,7 @@ for draw in range(num_cards):
     computer_hand.append(shuffled.pop(0))
 
 # For testing only -- please remove comments / add back in for you verify understanding
-# """
+"""
 print("Player's hand:")
 for card in user_hand:
     print(deck[card], end=' ')
@@ -61,7 +61,7 @@ print("Computer's hand:")
 for card in computer_hand:
     print(deck[card], end=' ')
 print('\n')
-# """
+"""
 
 # ----- STOP commenting out ---------
 
@@ -84,30 +84,29 @@ The rest of the program you will write goes here
 gameEnd = False
 nextRound = True
 
-while not gameEnd:
-    if nextRound:
-        drawPlayerCard = deck[user_hand[0]]
-        playerCard = drawPlayerCard[0] + drawPlayerCard[1]
-        playerCardValue = drawPlayerCard[2]
+while not gameEnd: # Begin game loop
+    if nextRound: # Begin game round instance
+        drawPlayerCard = deck[user_hand[0]] # Find first card in user's deck
+        # playerCard = drawPlayerCard[0] + drawPlayerCard[1]
         
         drawComputerCard = deck[computer_hand[0]]
-        computerCard = drawComputerCard[0] + drawComputerCard[1]
-        computerCardValue = drawComputerCard[2]
-        print(f'Your card: {playerCard}\nComputer player card: {computerCard}')
+        # computerCard = drawComputerCard[0] + drawComputerCard[1]
+        print(f'Your card: {drawPlayerCard[0] + drawPlayerCard[1]}')
+        print(f'Computer player card: {drawComputerCard[0] + drawComputerCard[1]}')
         
-        if playerCardValue > computerCardValue:
+        if drawPlayerCard[2] > drawComputerCard[2]:
             user_hand.append(user_hand.pop(0))
             user_hand.append(computer_hand.pop(0))
             print('You won this round - cards added to the end of your pile')
             print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
-        elif computerCardValue > playerCardValue:
+        elif drawComputerCard[2] > drawPlayerCard[2]:
             computer_hand.append(computer_hand.pop(0))
             computer_hand.append(user_hand.pop(0))
             print('Computer has won this round - cards added to the end of its pile')
             print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
-        elif playerCardValue == computerCardValue:
+        elif drawPlayerCard[2] == drawComputerCard[2]:
             user_hand.pop(0)
             computer_hand.pop(0)
             print('Draw! Both cards discarded')
