@@ -81,10 +81,10 @@ print('\n')
 The rest of the program you will write goes here
 '''
 
-roundEnd = False
+gameEnd = False
 nextRound = True
 
-while not roundEnd:
+while not gameEnd:
     if nextRound:
         drawPlayerCard = deck[user_hand[0]]
         playerCard = drawPlayerCard[0] + drawPlayerCard[1]
@@ -113,7 +113,13 @@ while not roundEnd:
             print('Draw! Both cards discarded')
             print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
             nextRound = False
-            
+
+    elif len(user_hand) == 0:
+        print('Computer won the game!')
+        gameEnd = True
+    elif len(computer_hand) == 0:
+        print('You won the game!')
+        gameEnd = True
     else:
         playerInput = input('Hit P to play next round or Q to QUIT: ')
         if playerInput == 'p':
@@ -121,4 +127,4 @@ while not roundEnd:
             nextRound = True
         elif playerInput == 'q':
             print('Game end \n')
-            break
+            gameEnd = True
