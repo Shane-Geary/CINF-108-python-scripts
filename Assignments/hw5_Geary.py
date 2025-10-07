@@ -7,6 +7,7 @@
 
 # Import random Library for purpose of shuffling cards
 import random
+from colorama import Fore, Style, init
 
 # Deck of cards defined as a dictionary called 'deck'.  Each card is identified
 #  by a unique key between 1 - 52 (no Jokers).  The value of each card is list
@@ -87,41 +88,40 @@ nextRound = True # Flag to begin and end round instance
 while not gameEnd: # Begin game loop
     if nextRound: # Begin game round instance
         drawPlayerCard = deck[user_hand[0]] # Find first card in user's hand
-        
         drawComputerCard = deck[computer_hand[0]] # Find first card in computer's hand
-        print(f'Your card: {drawPlayerCard[0] + drawPlayerCard[1]}')
-        print(f'Computer player card: {drawComputerCard[0] + drawComputerCard[1]}')
         
-        if drawPlayerCard[2] > drawComputerCard[2]:
+        print(Fore.WHITE + f'Your card: {drawPlayerCard[0] + drawPlayerCard[1]}')
+        print(Fore.WHITE + f'Computer player card: {drawComputerCard[0] + drawComputerCard[1]}')
+        
+        if drawPlayerCard[2] > drawComputerCard[2]: # If players card is larger, append both cards to end player's deck
             user_hand.append(user_hand.pop(0))
             user_hand.append(computer_hand.pop(0))
-            print('You won this round - cards added to the end of your pile')
-            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
-            nextRound = False
-        elif drawComputerCard[2] > drawPlayerCard[2]:
+            print(Fore.GREEN + 'You won this round - cards added to the end of your pile')
+            nextRound = False # End round
+        elif drawComputerCard[2] > drawPlayerCard[2]: # If computers card is larger, append both cards to end computer's deck
             computer_hand.append(computer_hand.pop(0))
             computer_hand.append(user_hand.pop(0))
-            print('Computer has won this round - cards added to the end of its pile')
-            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
-            nextRound = False
-        elif drawPlayerCard[2] == drawComputerCard[2]:
+            print(Fore.RED + 'Computer has won this round - cards added to the end of its pile')
+            nextRound = False # End round
+        elif drawPlayerCard[2] == drawComputerCard[2]: # If cards are equal value, discard both
             user_hand.pop(0)
             computer_hand.pop(0)
-            print('Draw! Both cards discarded')
-            print(f'Player cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
-            nextRound = False
+            print(Fore.LIGHTMAGENTA_EX + 'Draw! Both cards discarded')
+            nextRound = False # End round
 
-    elif len(user_hand) == 0:
-        print('Computer won the game!')
-        gameEnd = True
-    elif len(computer_hand) == 0:
-        print('You won the game!')
-        gameEnd = True
-    else:
-        playerInput = input('Hit P to play next round or Q to QUIT: ')
+    elif len(user_hand) == 0: # When a round ends, check if player has zero cards
+        print(Fore.RED + 'Computer won the game!')
+        print(Fore.CYAN + f'Final score:\nPlayer cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
+        gameEnd = True # End game
+    elif len(computer_hand) == 0: # When a round ends, check if computer has zero cards
+        print(Fore.LIGHTCYAN_EX + 'You won the game!')
+        print(Fore.CYAN + f'Final score:\nPlayer cards: {len(user_hand)} Computer cards: {len(computer_hand)}')
+        gameEnd = True # End game
+    else: # If opponents both have cards in their deck when a round ends, prompt for next round, or to end game
+        playerInput = input(Fore.YELLOW + 'Hit P to play next round or Q to QUIT: ')
         if playerInput == 'p':
-            print('Next round')
+            print(Fore.WHITE + 'Next round')
             nextRound = True
         elif playerInput == 'q':
-            print('Game end \n')
+            print(Fore.WHITE + 'Game end \n')
             gameEnd = True
