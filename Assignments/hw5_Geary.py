@@ -121,7 +121,7 @@ while not gameEnd: # Begin game loop
         playerInput = input(Fore.YELLOW + 'Hit P to play next round or Q to QUIT: ')
         if playerInput == 'p':
             print(Fore.WHITE + 'Next round')
-            nextRound = True
+            nextRound = True # Start next round
         elif playerInput == 'q':
             print(Fore.WHITE + 'Game end \n')
-            gameEnd = True
+            gameEnd = True # End game
