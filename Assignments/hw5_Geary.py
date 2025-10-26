@@ -93,12 +93,12 @@ while not gameEnd: # Begin game loop
         print(Fore.WHITE + f'Your card: {drawPlayerCard[0] + drawPlayerCard[1]}')
         print(Fore.WHITE + f'Computer player card: {drawComputerCard[0] + drawComputerCard[1]}')
         
-        if drawPlayerCard[2] > drawComputerCard[2]: # If players card is larger, append both cards to end player's deck
+        if drawPlayerCard[2] > drawComputerCard[2]: # If players card is larger, append both cards to end of player's deck
             user_hand.append(user_hand.pop(0))
             user_hand.append(computer_hand.pop(0))
             print(Fore.GREEN + 'You won this round - cards added to the end of your pile')
             nextRound = False # End round
-        elif drawComputerCard[2] > drawPlayerCard[2]: # If computers card is larger, append both cards to end computer's deck
+        elif drawComputerCard[2] > drawPlayerCard[2]: # If computers card is larger, append both cards to end of computer's deck
             computer_hand.append(computer_hand.pop(0))
             computer_hand.append(user_hand.pop(0))
             print(Fore.RED + 'Computer has won this round - cards added to the end of its pile')
